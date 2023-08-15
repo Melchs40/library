@@ -14,7 +14,18 @@ function Book(title, author, pages, read) {
     // this.addBookToLibrary();
 }
 
-function addBookToLibrary(book) {
-    myLibrary.push(book);
-}
+document.getElementById("enter-info").addEventListener("click", function() {;
+
+    title = document.getElementById("book-title").value;
+    author = document.getElementById("author-name").value;
+    pages = document.getElementById("page-number").value;
+    if (document.getElementById("yes").checked) {
+        read = "read"
+    } else read = "not read";
+    myLibrary.push(new Book(title, author, pages, read));
+    document.getElementById("book-content").textContent = title + " by " + author + " is " + pages + " pages and I have " + read + " this."
+
+});
+
+
 
