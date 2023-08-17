@@ -15,14 +15,24 @@ document.getElementById("enter-info").addEventListener("click", function() {;
     title = document.getElementById("book-title").value;
     author = document.getElementById("author-name").value;
     pages = document.getElementById("total-pages").value;
+
     if (document.getElementById("yes").checked) {
         read = "read"
     } else read = "not read";
     myLibrary.push(new Book(title, author, pages, read));
-    document.getElementById("book-content").textContent = title + " by " + author + " is " + pages + " pages and I have " + read + " this."
+    document.getElementById("book-content").textContent += title + " by " + author + " is " + pages + " pages and I have " + read + " this."
 
+    clearText = () => {
+        document.getElementById("book-title").value = "";
+        document.getElementById("author-name").value = "";
+        document.getElementById("total-pages").value = "";
+        document.getElementById("yes").checked = false;
+        document.getElementById("no").checked = false;
+    }
 
-});
+    clearText();
+
+    });
 
 
 
