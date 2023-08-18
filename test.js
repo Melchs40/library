@@ -3,17 +3,17 @@ let myLibrary = [];
 
 
 // create object constructor to be placed into myLibrary array
-function Book(title, author, pages, read) {
+function Book(title, author, read, rating) {
     this.title = title
     this.author = author
-    this.pages = pages
     this.read = read
+    this.rating = rating
 }
 
 
 // create function on Book prototype
 Book.prototype.info = function() {
-    return this.title + " by " + this.author + " is " + this.pages + " pages and I have " + this.read + " this.";
+    return this.title + " by " + this.author + ",  I have " + this.read + " this, and rated it " + this.rating + " stars.";
 };
 
 
@@ -22,19 +22,19 @@ document.getElementById("enter-info").addEventListener("click", function() {;
 
     let title = document.getElementById("book-title").value;
     let author = document.getElementById("author-name").value;
-    let pages = document.getElementById("total-pages").value;
+    let rating = document.getElementById("rating").value;
 
-    if (document.getElementById("yes").checked) {
+    if (document.getElementById("read").value === "read") {
         read = "Read"
     } else read = "Not Read";
-    myLibrary.push(new Book(title, author, pages, read));
+    myLibrary.push(new Book(title, author, read, rating));
 
     // create new div within click event
     addElement = () => {
         let newDiv = document.createElement("div");
-        newContent = document.createTextNode("Title: " + title + "\n" + "Author: " + author + "\n" + "Total Pages: " + pages + "\n" + "Read/Not Read: " + read);
+        newContent = document.createTextNode("Title: " + title + "\n" + "Author: " + author + "\n" + "Rating: " + rating + "\n" + "Read/Not Read: " + read);
         newDiv.appendChild(newContent);
-        // newDiv.setAttribute("id", "book-1")
+        newDiv.classList.add("book-div");
         let currentDiv = document.getElementById("content-div");
         document.body.insertBefore(newDiv, currentDiv);
     };
@@ -43,24 +43,25 @@ document.getElementById("enter-info").addEventListener("click", function() {;
     clearText = () => {
         document.getElementById("book-title").value = "";
         document.getElementById("author-name").value = "";
-        document.getElementById("total-pages").value = "";
-        document.getElementById("yes").checked = false;
-        document.getElementById("no").checked = false;
+        document.getElementById("rating").value = 3;
     }
     // creates alert on no title, adds unknown to author/pages when missing
     if (title == "") {
         alert("Title necessary, please enter the book's title")
-    } else if (author == "" && pages == "") {
-        author = "Unknown";
-        pages = "Unknown";
-        addElement(), clearText();
     } else if (author == "") {
         author = "Unknown";
         addElement(), clearText();
-    } else if (pages == "") {
-        pages = "unknown";
-        addElement(), clearText();
     } else addElement(), clearText();
+});
+
+// create visual output for rating system in form
+const rating = document.querySelector("#rating");
+const output = document.querySelector(".rating-output");
+
+output.textContent = rating.value;
+
+rating.addEventListener("input", () => {
+  output.textContent = rating.value;
 });
 
 

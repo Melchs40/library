@@ -8,23 +8,39 @@
 
 </head>
 <body>
+    <div id="page-title">My Book Library</div>
+    
     <div class="form-content" id="book-form">
         <form action="#" id="my-form" action="get">
             <label for="book-title">Book Title:</label>
             <input type="text" id="book-title" name="book-title" required placeholder="Enter book title">
             <label for="author-name">Author:</label>
             <input type="text" id="author-name" name="author-name" required placeholder="Enter author name">
-            <label for="page-number">Total Pages:</label>
-            <input type="number" id="total-pages" name="total-pages" required placeholder="Enter total pages">
-            <p>Have you read this?</p>
-            <label for="read-book">Yes:</label>
-            <input type="radio" id="yes" name="read-book">
-            <label for="read-book">No:</label>
-            <input type="radio" id="no" name="read-book">
+            <label for="read">Read/Not Read:</label>
+            <select id="read" name="read">
+                <option selected>Read</option>
+                <option>Not Read</option>
+              </select>
+            <label for="rating">Rating:</label>
+            <input type="range"
+                name="rating"
+                id="rating"
+                min="1"
+                max="5"
+                step="1"
+                value="3" />
+            <output class="rating-output" for="rating"></output>
             <button type="button" id="enter-info">Submit</button>
         </form>
-
     </div>
+    
+    <table class="page-table" id="book-table"></table>
+        <tr></tr>
+        <th>Book</th>
+        <th>Author</th>
+        <th>Read/Not Read</th>
+        <th>Rating</th>
+
     <div id="content-div">Test</div>
 
     <script src="test.js"></script>
