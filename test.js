@@ -22,11 +22,9 @@ document.getElementById("enter-info").addEventListener("click", function() {;
 
     let title = document.getElementById("book-title").value;
     let author = document.getElementById("author-name").value;
-    let rating = document.getElementById("rating").value;
-
-    if (document.getElementById("read").value === "read") {
-        read = "Read"
-    } else read = "Not Read";
+     let read = document.getElementById("read").value;
+     let rating = document.getElementById("rating").value;
+    
     myLibrary.push(new Book(title, author, read, rating));
 
     // create new div within click event
