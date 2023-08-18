@@ -28,28 +28,42 @@ document.getElementById("enter-info").addEventListener("click", function() {;
     myLibrary.push(new Book(title, author, read, rating));
 
     // create new div within click event
-    addElement = () => {
-        let newDiv = document.createElement("div");
-        newContent = document.createTextNode("Title: " + title + "\n" + "Author: " + author + "\n" + "Rating: " + rating + "\n" + "Read/Not Read: " + read);
-        newDiv.appendChild(newContent);
-        newDiv.classList.add("book-div");
-        let currentDiv = document.getElementById("content-div");
-        document.body.insertBefore(newDiv, currentDiv);
-    };
+    // addElement = () => {
+    //     let newDiv = document.createElement("div");
+    //     newContent = document.createTextNode("Title: " + title + "\n" + "Author: " + author + "\n" + "Rating: " + rating + "\n" + "Read/Not Read: " + read);
+    //     newDiv.appendChild(newContent);
+    //     newDiv.classList.add("book-div");
+    //     let currentDiv = document.getElementById("content-div");
+    //     document.body.insertBefore(newDiv, currentDiv);
+    // };
+
+    insertTable = () => {
+        let table = document.getElementById("table-data");
+        table.innerHTML="";
+        let tr="";
+        myLibrary.forEach(x=>{
+           tr+='<tr>';
+           tr+='<td>'+x.title+'</td>'+'<td>'+x.author+'</td>'+'<td>'+x.read+'</td>'+'<td>'+x.rating+'</td>'
+           tr+='</tr>'
+      
+        })
+        table.innerHTML+=tr;
+      }
 
     // clears the text from the form within click event
     clearText = () => {
         document.getElementById("book-title").value = "";
         document.getElementById("author-name").value = "";
         document.getElementById("rating").value = 3;
+        document.querySelector(".rating-output").value = 3;
     }
     // creates alert on no title, adds unknown to author/pages when missing
     if (title == "") {
         alert("Title necessary, please enter the book's title")
     } else if (author == "") {
         author = "Unknown";
-        addElement(), clearText();
-    } else addElement(), clearText();
+        insertTable(), clearText();
+    } else insertTable(), clearText();
 });
 
 // create visual output for rating system in form
