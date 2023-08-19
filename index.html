@@ -9,6 +9,8 @@
 </head>
 <body>
     <div id="page-title">My Book Library</div>
+
+    <div id="page-text">This page allows you to keep track of all of your books. You can add a title, the author, whether you've read it or not, and a rating (1-5). A title is required, but all other information is optional.</div>
     
     <div class="form-content" id="book-form">
         <form action="#" id="my-form" action="get">
@@ -36,18 +38,18 @@
     
     <table class="page-table" id="book-table">
         <thead>
-            <tr>
-                <th>Book</th>
-                <th>Author</th>
-                <th>Read/Not Read</th>
-                <th>Rating</th>
+            <tr id="table-head">
+                <th class="table-title">Book</th>
+                <th class="table-title">Author</th>
+                <th class="table-title">Read/Not Read</th>
+                <th class="table-title">Rating</th>
             </tr>
         </thead>
         <tbody id="table-data">
 
         </tbody>
     </table>
-    
+
     <div id="content-div">Test</div>
 
     <script src="test.js"></script>

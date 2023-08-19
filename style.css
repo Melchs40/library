@@ -1,11 +1,48 @@
+@import url('https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,200&family=Mukta:wght@200&family=Tilt+Neon&display=swap');
+
+body {  
+    font-family: 'Literata', serif;
+    background-color: #FDFCF7;
+}
+
+
 .book-div {
     border: 1px dashed black;
 }
 
 #page-title {
-    font-size: 36px;
+    display: flex;
+    justify-content: center;
+    font-size: 48px;
+    padding: 48px;
+}
+
+#book-form {
+    display: flex;
+    justify-content: center;
+    padding-bottom: 36px;
+}
+
+#page-text {
+    display: flex;
+    justify-content: center;
+    padding-bottom: 36px;
 }
 
 #book-table {
-
+    table-layout: fixed;
+    width: 100%;
 }
+
+.table-title {
+    text-align: left;
+    border-bottom: 1px solid red;
+}
+
+#table-data {
+    text-align: start;
+    padding-left: 36px;
+    width: 100%;
+}
+
+
