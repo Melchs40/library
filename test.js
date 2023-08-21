@@ -27,16 +27,18 @@ document.getElementById("enter-info").addEventListener("click", function() {;
 
     // inserts new table rows into table
     insertTable = () => {
+
         let table = document.getElementById("table-data");
-        table.innerHTML="";
-        let tr="";
-        myLibrary.forEach(x=>{
-           tr+='<tr>';
-           tr+='<td>'+x.title+'</td>'+'<td>'+x.author+'</td>'+'<td>'+x.read+'</td>'+'<td>'+x.rating+'</td>'
-           tr+='</tr>'
-      
-        })
-        table.innerHTML+=tr;
+        table.innerHTML = "";
+        let tr = "";
+
+        myLibrary.forEach(x => {
+           tr += "<tr>";
+           tr += "<td>" + x.title + "</td>" + "<td>" + x.author + "</td>" + "<td>" + x.read+ "</td>" + "<td>" + x.rating + "<button class='delete-button'>Delete</button>" + "</td>";
+           tr +='</tr>'
+        });
+
+        table.innerHTML += tr;
       }
 
     // clears the text from the form within click event
@@ -46,7 +48,7 @@ document.getElementById("enter-info").addEventListener("click", function() {;
         document.getElementById("rating").value = 3;
         document.querySelector(".rating-output").value = 3;
     }
-    // creates alert on no title, adds unknown to author when missing
+    // creates alert on no title, adds unknown to author when missing, blank rating when not read
     if (title == "") {
         alert("Title necessary, please enter the book's title")
     } else if (author == "" && read == "Not Read") {
