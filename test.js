@@ -52,6 +52,12 @@ document.getElementById("enter-info").addEventListener("click", function() {;
     } else if (author == "" && read == "Not Read") {
         myLibrary.push(new Book(title, "Unknown", read, "-"));
         insertTable(), clearText();
+    } else if (author == "") {
+        myLibrary.push(new Book(title, "Unknown", read, rating));
+        insertTable(), clearText();
+    } else if (read == "Not Read") {
+        myLibrary.push(new Book(title, author, read, "-"));
+        insertTable(), clearText();
     } else myLibrary.push(new Book(title, author, read, rating)), insertTable(), clearText();
 });
 
