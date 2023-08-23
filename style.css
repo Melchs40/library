@@ -31,7 +31,10 @@ body {
 
 #book-table {
     table-layout: fixed;
-    width: 100%;
+    margin-left: 5%;
+    margin-right: 5%;
+    width: 90%;
+    min-width: 600px;
 }
 
 .table-title {
@@ -41,13 +44,17 @@ body {
 
 #table-data {
     text-align: start;
-    padding-left: 36px;
-    width: 100%;
+    width: 80%;
+}
+
+.rating {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
 }
 
 .delete-button {
-    position: relative;
-    right: -150px;
+    margin-right: 2rem;
 }
 
 

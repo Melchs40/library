@@ -25,7 +25,7 @@ document.getElementById("enter-info").addEventListener("click", function() {;
     let read = document.getElementById("read").value;
     let rating = document.getElementById("rating").value;
 
-    // inserts new table rows into table
+    // insert new table rows into table
     function insertTable () {
         let table = document.getElementById("table-data");
 
@@ -37,7 +37,7 @@ document.getElementById("enter-info").addEventListener("click", function() {;
             row.insertCell(3).innerHTML = myLibrary[i].rating;
         }
         
-
+        // add class to each new cell in table
         let bookCells = document.querySelectorAll("td:nth-child(1)");
         for(var i = 0 ; i < bookCells.length ; i++) {
             bookCells[i].classList.add("book");
@@ -57,8 +57,8 @@ document.getElementById("enter-info").addEventListener("click", function() {;
         for(var i = 0 ; i < ratingCells.length ; i++) {
             ratingCells[i].classList.add("rating");
         }
+
         
-        document.getElementById("table-data").append(table);
     }
 
     // clears the text from the form within click event
@@ -69,19 +69,29 @@ document.getElementById("enter-info").addEventListener("click", function() {;
         document.getElementById("rating").value = 3;
         document.querySelector(".rating-output").value = 3;
     }
+
+    insertButton = () => {
+        let lastRow = document.getElementsByClassName("rating");
+        let lastRowArr = Array.from(lastRow);
+        let newButton = document.createElement('button');
+        newButton.textContent = 'Delete';
+        newButton.classList.add("delete-button");
+
+        lastRowArr.forEach((lastRow) => lastRow.appendChild(newButton))
+    }
     // creates alert on no title, adds unknown to author when missing, blank rating when not read
     if (title == "") {
         alert("Title necessary, please enter the book's title")
     } else if (author == "" && read == "Not Read") {
         myLibrary.push(new Book(title, "Unknown", read, "-"));
-        insertTable(), clearText();
+        insertTable(), insertButton(), clearText();
     } else if (author == "") {
         myLibrary.push(new Book(title, "Unknown", read, rating));
-        insertTable(), clearText();
+        insertTable(), insertButton(), clearText();
     } else if (read == "Not Read") {
         myLibrary.push(new Book(title, author, read, "-"));
-        insertTable(), clearText();
-    } else myLibrary.push(new Book(title, author, read, rating)), insertTable(), clearText();
+        insertTable(), insertButton(), clearText();
+    } else myLibrary.push(new Book(title, author, read, rating)), insertTable(), insertButton(), clearText();
 });
 
 // create visual output for rating system in form
