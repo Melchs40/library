@@ -18,7 +18,7 @@ Book.prototype.info = function() {
 
 
 //  create object to be added to myLibrary with click event
-document.getElementById("enter-info").addEventListener("click", function() {;
+document.getElementById("enter-info").addEventListener("click", function() {
 
     let title = document.getElementById("book-title").value;
     let author = document.getElementById("author-name").value;
@@ -79,19 +79,29 @@ document.getElementById("enter-info").addEventListener("click", function() {;
 
         lastRowArr.forEach((lastRow) => lastRow.appendChild(newButton))
     }
+
+    function deleteButton() {
+        let deleteBtn = document.querySelectorAll(".delete-button");
+        deleteBtn.forEach(function(btn) {
+        btn.addEventListener("click", function() {
+            btn.parentNode.parentNode.parentNode.removeChild(btn.parentNode.parentNode);
+        });
+         });
+    }
+
     // creates alert on no title, adds unknown to author when missing, blank rating when not read
     if (title == "") {
         alert("Title necessary, please enter the book's title")
     } else if (author == "" && read == "Not Read") {
         myLibrary.push(new Book(title, "Unknown", read, "-"));
-        insertTable(), insertButton(), clearText();
+        insertTable(), insertButton(), clearText(), deleteButton();
     } else if (author == "") {
         myLibrary.push(new Book(title, "Unknown", read, rating));
-        insertTable(), insertButton(), clearText();
+        insertTable(), insertButton(), clearText(), deleteButton();
     } else if (read == "Not Read") {
         myLibrary.push(new Book(title, author, read, "-"));
-        insertTable(), insertButton(), clearText();
-    } else myLibrary.push(new Book(title, author, read, rating)), insertTable(), insertButton(), clearText();
+        insertTable(), insertButton(), clearText(), deleteButton();
+    } else myLibrary.push(new Book(title, author, read, rating)), insertTable(), insertButton(), clearText(), deleteButton();
 });
 
 // create visual output for rating system in form
@@ -103,3 +113,9 @@ output.textContent = rating.value;
 rating.addEventListener("input", () => {
   output.textContent = rating.value;
 });
+
+[...document.querySelectorAll(".delete-button")].forEach(function(btn) {
+    btn.addEventListener("click", function() {
+      console.log("hello");
+    });
+     });
