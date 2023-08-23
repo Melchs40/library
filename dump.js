@@ -143,3 +143,39 @@ rating.addEventListener("input", () => {
 
 
 
+
+
+insertTable = () => {
+
+    let table = document.getElementById("table-data");
+    table.innerHTML = "";
+    let tr = "";
+
+    myLibrary.forEach(x => {
+       tr += "<tr>";
+       tr += "<td>" + x.title + "</td>" + "<td>" + x.author + "</td>" + "<td>" + "<button class='read-button'>" + x.read + "</button>" + "</td>" + "<td>" + x.rating + "</td>";
+       tr +='</tr>'
+    });
+
+    table.innerHTML += tr;
+
+    let bookCells = document.querySelectorAll("td:nth-child(1)");
+    for(var i = 0 ; i < bookCells.length ; i++) {
+        bookCells[i].classList.add("book");
+    }
+
+    let authorCells = document.querySelectorAll("td:nth-child(2)");
+    for(var i = 0 ; i < authorCells.length ; i++) {
+        authorCells[i].classList.add("author");
+    }
+
+    let readCells = document.querySelectorAll("td:nth-child(3)");
+    for(var i = 0 ; i < readCells.length ; i++) {
+        readCells[i].classList.add("read");
+    }
+
+    let ratingCells = document.querySelectorAll("td:nth-child(4)");
+    for(var i = 0 ; i < ratingCells.length ; i++) {
+        ratingCells[i].classList.add("rating");
+    }
+};

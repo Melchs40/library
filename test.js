@@ -13,7 +13,7 @@ function Book(title, author, read, rating) {
 
 // create function on Book prototype
 Book.prototype.info = function() {
-    return this.title + " by " + this.author + ",  I have " + this.read + " this, and rated it " + this.rating + " stars.";
+    return this.title + " by " + this.author + ", I have " + this.read + " this, and rated it " + this.rating + " out of five.";
 };
 
 
@@ -26,19 +26,17 @@ document.getElementById("enter-info").addEventListener("click", function() {;
     let rating = document.getElementById("rating").value;
 
     // inserts new table rows into table
-    insertTable = () => {
-
+    function insertTable () {
         let table = document.getElementById("table-data");
-        table.innerHTML = "";
-        let tr = "";
 
-        myLibrary.forEach(x => {
-           tr += "<tr>";
-           tr += "<td>" + x.title + "</td>" + "<td>" + x.author + "</td>" + "<td>" + x.read+ "</td>" + "<td>" + x.rating + "</td>";
-           tr +='</tr>'
-        });
-
-        table.innerHTML += tr;
+        for(let i = [myLibrary.length-1]; i < myLibrary.length; i++) {
+            var row = table.insertRow(i);
+            row.insertCell(0).innerHTML = myLibrary[i].title;
+            row.insertCell(1).innerHTML = myLibrary[i].author;
+            row.insertCell(2).innerHTML = myLibrary[i].read;
+            row.insertCell(3).innerHTML = myLibrary[i].rating;
+        }
+        
 
         let bookCells = document.querySelectorAll("td:nth-child(1)");
         for(var i = 0 ; i < bookCells.length ; i++) {
@@ -59,12 +57,15 @@ document.getElementById("enter-info").addEventListener("click", function() {;
         for(var i = 0 ; i < ratingCells.length ; i++) {
             ratingCells[i].classList.add("rating");
         }
-    };
+        
+        document.getElementById("table-data").append(table);
+    }
 
     // clears the text from the form within click event
     clearText = () => {
         document.getElementById("book-title").value = "";
         document.getElementById("author-name").value = "";
+        document.getElementById("read").selectedIndex = 0;
         document.getElementById("rating").value = 3;
         document.querySelector(".rating-output").value = 3;
     }
