@@ -77,16 +77,17 @@ document.getElementById("enter-info").addEventListener("click", function() {
         newButton.textContent = 'Delete';
         newButton.classList.add("delete-button");
 
-        lastRowArr.forEach((lastRow) => lastRow.appendChild(newButton))
-    }
+        for (var i = 0; i < myLibrary.length; i++) {
+            newButton.setAttribute("id", i);
+        }
 
-    function deleteButton() {
-        let deleteBtn = document.querySelectorAll(".delete-button");
-        deleteBtn.forEach(function(btn) {
-        btn.addEventListener("click", function() {
-            btn.parentNode.parentNode.parentNode.removeChild(btn.parentNode.parentNode);
+        lastRowArr.forEach((lastRow) => lastRow.appendChild(newButton))
+        
+        //adds delete button to each delete button
+        newButton.addEventListener("click", event => {
+            newButton.parentNode.parentNode.parentNode.removeChild(newButton.parentNode.parentNode);
+            myLibrary.splice(newButton.id, 1);
         });
-         });
     }
 
     // creates alert on no title, adds unknown to author when missing, blank rating when not read
@@ -94,14 +95,14 @@ document.getElementById("enter-info").addEventListener("click", function() {
         alert("Title necessary, please enter the book's title")
     } else if (author == "" && read == "Not Read") {
         myLibrary.push(new Book(title, "Unknown", read, "-"));
-        insertTable(), insertButton(), clearText(), deleteButton();
+        insertTable(), insertButton(), clearText();
     } else if (author == "") {
         myLibrary.push(new Book(title, "Unknown", read, rating));
-        insertTable(), insertButton(), clearText(), deleteButton();
+        insertTable(), insertButton(), clearText();
     } else if (read == "Not Read") {
         myLibrary.push(new Book(title, author, read, "-"));
-        insertTable(), insertButton(), clearText(), deleteButton();
-    } else myLibrary.push(new Book(title, author, read, rating)), insertTable(), insertButton(), clearText(), deleteButton();
+        insertTable(), insertButton(), clearText();
+    } else myLibrary.push(new Book(title, author, read, rating)), insertTable(), insertButton(), clearText();
 });
 
 // create visual output for rating system in form
