@@ -90,19 +90,28 @@ document.getElementById("enter-info").addEventListener("click", function() {
         });
     }
 
+    // function deleteButton() {
+    //     document.querySelectorAll(".delete-button").forEach(button => {
+    //         button.addEventListener("click", event => {
+    //             button.parentNode.parentNode.parentNode.removeChild(button.parentNode.parentNode);
+    //             myLibrary.splice(button.id, 1);
+    //         });
+    //     });
+    // }
+
     // creates alert on no title, adds unknown to author when missing, blank rating when not read
     if (title == "") {
         alert("Title necessary, please enter the book's title")
     } else if (author == "" && read == "Not Read") {
         myLibrary.push(new Book(title, "Unknown", read, "-"));
-        insertTable(), insertButton(), clearText();
+        insertTable(), insertButton(), clearText() //deleteButton();
     } else if (author == "") {
         myLibrary.push(new Book(title, "Unknown", read, rating));
-        insertTable(), insertButton(), clearText();
+        insertTable(), insertButton(), clearText() //deleteButton();
     } else if (read == "Not Read") {
         myLibrary.push(new Book(title, author, read, "-"));
-        insertTable(), insertButton(), clearText();
-    } else myLibrary.push(new Book(title, author, read, rating)), insertTable(), insertButton(), clearText();
+        insertTable(), insertButton(), clearText() //deleteButton();
+    } else myLibrary.push(new Book(title, author, read, rating)), insertTable(), insertButton(), clearText() //deleteButton();
 });
 
 // create visual output for rating system in form
