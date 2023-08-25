@@ -33,7 +33,7 @@ document.getElementById("enter-info").addEventListener("click", function() {
             var row = table.insertRow(i);
             row.insertCell(0).innerHTML = myLibrary[i].title;
             row.insertCell(1).innerHTML = myLibrary[i].author;
-            row.insertCell(2).innerHTML = myLibrary[i].read;
+            row.insertCell(2).innerHTML = "";
             row.insertCell(3).innerHTML = myLibrary[i].rating;
         }
         
@@ -73,8 +73,8 @@ document.getElementById("enter-info").addEventListener("click", function() {
     insertButton = () => {
         let lastRow = document.getElementsByClassName("rating");
         let lastRowArr = Array.from(lastRow);
-        let newButton = document.createElement('button');
-        newButton.textContent = 'Delete';
+        let newButton = document.createElement("button");
+        newButton.textContent = "Delete";
         newButton.classList.add("delete-button");
 
         for (var i = 0; i < myLibrary.length; i++) {
@@ -83,7 +83,7 @@ document.getElementById("enter-info").addEventListener("click", function() {
 
         lastRowArr.forEach((lastRow) => lastRow.appendChild(newButton))
         
-        //adds delete button to each delete button
+        //adds delete button functionality
         newButton.addEventListener("click", event => {
             newButton.parentNode.parentNode.parentNode.removeChild(newButton.parentNode.parentNode);
             myLibrary.splice(newButton.id, 1);
@@ -93,19 +93,33 @@ document.getElementById("enter-info").addEventListener("click", function() {
         });
     }
 
+    insertRead = () => {
+        let readRow = document.getElementsByClassName("read");
+        let readRowArr = Array.from(readRow);
+        let readButton = document.createElement("button");
+        readButton.classList.add("read-button");
+
+        for (var i = 0; i < myLibrary.length; i++) {
+            readButton.textContent = myLibrary[i].read;
+            readButton.setAttribute("id", "read-" + i);
+        }
+
+        readRowArr.forEach((readRow) => readRow.appendChild(readButton))
+    }
+
     // creates alert on no title, adds unknown to author when missing, blank rating when not read
     if (title == "") {
         alert("Title necessary, please enter the book's title")
     } else if (author == "" && read == "Not Read") {
         myLibrary.push(new Book(title, "Unknown", read, "-"));
-        insertTable(), insertButton(), clearText();
+        insertTable(), insertButton(), clearText(), insertRead();
     } else if (author == "") {
         myLibrary.push(new Book(title, "Unknown", read, rating));
-        insertTable(), insertButton(), clearText();
+        insertTable(), insertButton(), clearText(), insertRead();
     } else if (read == "Not Read") {
         myLibrary.push(new Book(title, author, read, "-"));
-        insertTable(), insertButton(), clearText();
-    } else myLibrary.push(new Book(title, author, read, rating)), insertTable(), insertButton(), clearText();
+        insertTable(), insertButton(), clearText(), insertRead();
+    } else myLibrary.push(new Book(title, author, read, rating)), insertTable(), insertButton(), clearText(), insertRead();
 });
 
 // create visual output for rating system in form
