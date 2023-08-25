@@ -35,6 +35,8 @@ body {
     margin-right: 5%;
     width: 90%;
     min-width: 600px;
+    border-spacing: 0;
+    border-collapse: collapse;
 }
 
 .table-title {
@@ -47,6 +49,12 @@ body {
     width: 80%;
 }
 
+#table-data td {
+    padding-top: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #E6E3DC;
+}
+
 .rating {
     display: flex;
     flex-wrap: nowrap;
@@ -55,10 +63,11 @@ body {
 }
 
 .delete-button {
+    font-family: 'Literata', serif;
+    border: 1px solid #DAD9D4;
     border-radius: 5px;
-    color: white;
-    background-color: red;
-    padding: 10px;
+    color: black;
+    background-color: #E6E3DC;
     margin-right: 2rem;
 }
 
