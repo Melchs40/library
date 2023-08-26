@@ -6,6 +6,10 @@ body {
 }
 
 
+.book-div {
+    border: 1px dashed black;
+}
+
 #page-title {
     display: flex;
     justify-content: center;
@@ -30,7 +34,6 @@ body {
     margin-left: 5%;
     margin-right: 5%;
     width: 90%;
-    min-width: 700px;
     border-spacing: 0;
     border-collapse: collapse;
 }
@@ -51,7 +54,12 @@ body {
     border-bottom: 1px solid #E6E3DC;
 }
 
-
+/* .rating {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+} */
 
 .delete-button, .read-button {
     font-family: 'Literata', serif;
@@ -59,11 +67,11 @@ body {
     border-radius: 5px;
     color: black;
     background-color: #E6E3DC;
-
 }
 
 .delete-button {
-    margin-left: 60%;
+    position: absolute;
+    right: 7%;
 }
 
 

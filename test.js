@@ -70,6 +70,7 @@ document.getElementById("enter-info").addEventListener("click", function() {
         document.querySelector(".rating-output").value = 3;
     }
 
+    // inserts delete button and adds id
     insertButton = () => {
         let lastRow = document.getElementsByClassName("rating");
         let lastRowArr = Array.from(lastRow);
@@ -93,6 +94,7 @@ document.getElementById("enter-info").addEventListener("click", function() {
         });
     }
 
+    // inserts read button and adds id
     insertRead = () => {
         let readRow = document.getElementsByClassName("read");
         let readRowArr = Array.from(readRow);
@@ -106,6 +108,7 @@ document.getElementById("enter-info").addEventListener("click", function() {
 
         readRowArr.forEach((readRow) => readRow.appendChild(readButton))
     }
+
 
     // creates alert on no title, adds unknown to author when missing, blank rating when not read
     if (title == "") {
@@ -136,4 +139,10 @@ rating.addEventListener("input", () => {
     btn.addEventListener("click", function() {
       console.log("hello");
     });
-     });
+});
+
+Book.prototype.changeStatus = function() {
+    if (this.read == "Read") {
+        this.read = "Not Read"
+    } else this.read = "Read"
+}
