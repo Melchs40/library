@@ -30,7 +30,7 @@ document.getElementById("enter-info").addEventListener("click", function() {
         let table = document.getElementById("table-data");
 
         for(let i = [myLibrary.length-1]; i < myLibrary.length; i++) {
-            var row = table.insertRow(i);
+            let row = table.insertRow(i);
             row.insertCell(0).innerHTML = myLibrary[i].title;
             row.insertCell(1).innerHTML = myLibrary[i].author;
             row.insertCell(2).innerHTML = "";
@@ -39,26 +39,33 @@ document.getElementById("enter-info").addEventListener("click", function() {
         
         // add class to each new cell in table
         let bookCells = document.querySelectorAll("td:nth-child(1)");
-        for(var i = 0 ; i < bookCells.length ; i++) {
+        for(let i = 0 ; i < bookCells.length ; i++) {
             bookCells[i].classList.add("book");
         }
 
         let authorCells = document.querySelectorAll("td:nth-child(2)");
-        for(var i = 0 ; i < authorCells.length ; i++) {
+        for(let i = 0 ; i < authorCells.length ; i++) {
             authorCells[i].classList.add("author");
         }
 
         let readCells = document.querySelectorAll("td:nth-child(3)");
-        for(var i = 0 ; i < readCells.length ; i++) {
+        for(let i = 0 ; i < readCells.length ; i++) {
             readCells[i].classList.add("read");
         }
 
         let ratingCells = document.querySelectorAll("td:nth-child(4)");
-        for(var i = 0 ; i < ratingCells.length ; i++) {
+        for(let i = 0 ; i < ratingCells.length ; i++) {
             ratingCells[i].classList.add("rating");
         }
 
         
+    }
+
+    Book.prototype.changeStatus = function() {
+
+        if (this.read == "Read") {
+            this.read = "Not Read"
+        } else this.read = "Read"
     }
 
     // clears the text from the form within click event
@@ -78,7 +85,7 @@ document.getElementById("enter-info").addEventListener("click", function() {
         newButton.textContent = "Delete";
         newButton.classList.add("delete-button");
 
-        for (var i = 0; i < myLibrary.length; i++) {
+        for (let i = 0; i < myLibrary.length; i++) {
             newButton.setAttribute("id", i);
         }
 
@@ -88,7 +95,7 @@ document.getElementById("enter-info").addEventListener("click", function() {
         newButton.addEventListener("click", event => {
             newButton.parentNode.parentNode.parentNode.removeChild(newButton.parentNode.parentNode);
             myLibrary.splice(newButton.id, 1);
-            for (var i = 0; i < myLibrary.length; i++) {
+            for (let i = 0; i < myLibrary.length; i++) {
                 document.getElementsByClassName("delete-button")[i].setAttribute("id", i);
             };
         });
@@ -101,12 +108,25 @@ document.getElementById("enter-info").addEventListener("click", function() {
         let readButton = document.createElement("button");
         readButton.classList.add("read-button");
 
-        for (var i = 0; i < myLibrary.length; i++) {
+        for (let i = 0; i < myLibrary.length; i++) {
             readButton.textContent = myLibrary[i].read;
             readButton.setAttribute("id", "read-" + i);
-        }
+            readButton.addEventListener('click', e => myLibrary[i].changeStatus())
+        };
 
-        readRowArr.forEach((readRow) => readRow.appendChild(readButton))
+        readRowArr.forEach((readRow) => readRow.appendChild(readButton));
+
+        // readButton.addEventListener("click", myLibrary[0].changeStatus());
+    
+        // readButton.addEventListener("click", event => {
+
+        //     for (let i = 0; i < myLibrary.length; i++) {
+        //         if (myLibrary[0].read == "Read") {
+        //             myLibrary[0].read = "Not Read"
+        //             readButton.textContent = "Not Read";
+        //     } else myLibrary[0].read = "Read", readButton.textContent = "Read";
+        // }
+        // })
     }
 
 
@@ -140,9 +160,3 @@ rating.addEventListener("input", () => {
       console.log("hello");
     });
 });
-
-Book.prototype.changeStatus = function() {
-    if (this.read == "Read") {
-        this.read = "Not Read"
-    } else this.read = "Read"
-}
