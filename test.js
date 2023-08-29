@@ -64,7 +64,7 @@ document.getElementById("enter-info").addEventListener("click", function() {
     Book.prototype.changeStatus = function() {
 
         if (this.read == "Read") {
-            this.read = "Not Read"
+            this.read = "Not Read";
         } else this.read = "Read"
     }
 
@@ -107,26 +107,26 @@ document.getElementById("enter-info").addEventListener("click", function() {
         let readRowArr = Array.from(readRow);
         let readButton = document.createElement("button");
         readButton.classList.add("read-button");
-
-        for (let i = 0; i < myLibrary.length; i++) {
-            readButton.textContent = myLibrary[i].read;
-            readButton.setAttribute("id", "read-" + i);
-            readButton.addEventListener('click', e => myLibrary[i].changeStatus())
-        };
+       
 
         readRowArr.forEach((readRow) => readRow.appendChild(readButton));
 
-        // readButton.addEventListener("click", myLibrary[0].changeStatus());
-    
-        // readButton.addEventListener("click", event => {
+        for (let i = 0; i < myLibrary.length; i++)  {
+            let readClass = document.getElementsByClassName("read-button");
+            readClass[i].textContent = myLibrary[i].read;
+            readClass[i].setAttribute("id", "read-" + i);
+            // readClass[i].addEventListener("click", e => myLibrary[i].changeStatus());
+            document.querySelectorAll(".read-button").forEach(button => {
+                button.addEventListener("click", function () {
+                if (button.textContent == "Not Read") {
+ --->                   button.textContent = "Read";
+                    console.log("success");
+                    myLibrary[button.id].changeStatus();
+                } else button.textContent = "Not Read", myLibrary[button.id].changeStatus();
+            })});
+        };
 
-        //     for (let i = 0; i < myLibrary.length; i++) {
-        //         if (myLibrary[0].read == "Read") {
-        //             myLibrary[0].read = "Not Read"
-        //             readButton.textContent = "Not Read";
-        //     } else myLibrary[0].read = "Read", readButton.textContent = "Read";
-        // }
-        // })
+        
     }
 
 
