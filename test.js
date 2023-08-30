@@ -8,6 +8,13 @@ function Book(title, author, read, rating) {
     this.author = author
     this.read = read
     this.rating = rating
+
+    Object.prototype.changeStatus = function() {
+
+        if (this.read == "Read") {
+            this.read = "Not Read";
+        } else this.read = "Read"
+    }
 }
 
 
@@ -61,12 +68,6 @@ document.getElementById("enter-info").addEventListener("click", function() {
         
     }
 
-    Book.prototype.changeStatus = function() {
-
-        if (this.read == "Read") {
-            this.read = "Not Read";
-        } else this.read = "Read"
-    }
 
     // clears the text from the form within click event
     clearText = () => {
@@ -111,20 +112,40 @@ document.getElementById("enter-info").addEventListener("click", function() {
 
         readRowArr.forEach((readRow) => readRow.appendChild(readButton));
 
-        for (let i = 0; i < myLibrary.length; i++)  {
-            let readClass = document.getElementsByClassName("read-button");
-            readClass[i].textContent = myLibrary[i].read;
-            readClass[i].setAttribute("id", "read-" + i);
-            // readClass[i].addEventListener("click", e => myLibrary[i].changeStatus());
-            document.querySelectorAll(".read-button").forEach(button => {
-                button.addEventListener("click", function () {
-                if (button.textContent == "Not Read") {
- --->                   button.textContent = "Read";
-                    console.log("success");
-                    myLibrary[button.id].changeStatus();
-                } else button.textContent = "Not Read", myLibrary[button.id].changeStatus();
-            })});
-        };
+        // for (let i = 0; i < myLibrary.length; i++)  {
+        //     let readClass = document.getElementsByClassName("read-button");
+        //     readClass[i].textContent = myLibrary[i].read;
+        //     readClass[i].setAttribute("id", "read-" + i);
+        //     // readClass[i].addEventListener("click", e => myLibrary[i].changeStatus());
+        //     document.querySelectorAll(".read-button").forEach(button => {
+        //         button.addEventListener("click", function () {
+        //         if (button.textContent == "Not Read") {
+        //            button.textContent = "Read";
+        //             console.log("success");
+        //             myLibrary[button.id].changeStatus();
+        //         } else button.textContent = "Not Read", myLibrary[button.id].changeStatus();
+        //     })});
+        // };
+
+        let readButtons = document.querySelectorAll(".read-button");
+
+        for (let i = [readButtons.length -1]; i < readButtons.length; i++) {
+            let button = readButtons[i];
+            button.textContent = myLibrary[i].read;
+            button.addEventListener("click", function() {
+
+                let textContent = button.textContent;
+
+                if (textContent === "Read") {
+                    button.textContent = "Not Read";
+                    myLibrary[i].changeStatus();
+                } else {
+                    button.textContent = "Read";
+                    myLibrary[i].changeStatus()
+                }
+              
+            });
+          }
 
         
     }
