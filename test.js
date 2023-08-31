@@ -38,6 +38,7 @@ document.getElementById("enter-info").addEventListener("click", function() {
 
         for(let i = [myLibrary.length-1]; i < myLibrary.length; i++) {
             let row = table.insertRow(i);
+            row.id = "row-" + i;
             row.insertCell(0).innerHTML = myLibrary[i].title;
             row.insertCell(1).innerHTML = myLibrary[i].author;
             row.insertCell(2).innerHTML = "";
@@ -64,10 +65,7 @@ document.getElementById("enter-info").addEventListener("click", function() {
         for(let i = 0 ; i < ratingCells.length ; i++) {
             ratingCells[i].classList.add("rating");
         }
-
-        
     }
-
 
     // clears the text from the form within click event
     clearText = () => {
@@ -94,23 +92,28 @@ document.getElementById("enter-info").addEventListener("click", function() {
         
         //adds delete button functionality
         newButton.addEventListener("click", event => {
-            newButton.parentNode.parentNode.parentNode.removeChild(newButton.parentNode.parentNode);
+            let table = document.getElementById("table-data");
+            table.deleteRow(newButton.id);
             myLibrary.splice(newButton.id, 1);
             for (let i = 0; i < myLibrary.length; i++) {
                 document.getElementsByClassName("delete-button")[i].setAttribute("id", i);
+                document.getElementsByClassName("read-button")[i].setAttribute("id", "read-" + i);
             };
+            let tableRows = document.getElementById("table-data").children;
+            for (let i = 0; i < tableRows.length; i++) {
+                let tableChild = tableRows[i];
+                tableChild.setAttribute("id", "row-" + i);
+            }
         });
     }
 
     // inserts read button and adds id
     insertRead = () => {
-        let readRow = document.getElementsByClassName("read");
-        let readRowArr = Array.from(readRow);
+        let readRow = document.querySelectorAll(".read");
         let readButton = document.createElement("button");
         readButton.classList.add("read-button");
        
-
-        readRowArr.forEach((readRow) => readRow.appendChild(readButton));
+        readRow.forEach((readRow) => readRow.appendChild(readButton));
 
         // for (let i = 0; i < myLibrary.length; i++)  {
         //     let readClass = document.getElementsByClassName("read-button");
@@ -132,22 +135,19 @@ document.getElementById("enter-info").addEventListener("click", function() {
         for (let i = [readButtons.length -1]; i < readButtons.length; i++) {
             let button = readButtons[i];
             button.textContent = myLibrary[i].read;
+            button.setAttribute("id", "read-" + i);
             button.addEventListener("click", function() {
 
                 let textContent = button.textContent;
-
                 if (textContent === "Read") {
                     button.textContent = "Not Read";
                     myLibrary[i].changeStatus();
                 } else {
                     button.textContent = "Read";
-                    myLibrary[i].changeStatus()
+                    myLibrary[i].changeStatus();
                 }
-              
             });
           }
-
-        
     }
 
 
