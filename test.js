@@ -36,13 +36,14 @@ document.getElementById("enter-info").addEventListener("click", function() {
     function insertTable () {
         let table = document.getElementById("table-data");
 
-        for(let i = [myLibrary.length-1]; i < myLibrary.length; i++) {
+        for(let i = [myLibrary.length -1]; i < myLibrary.length; i++) {
             let row = table.insertRow(i);
             row.id = "row-" + i;
             row.insertCell(0).innerHTML = myLibrary[i].title;
             row.insertCell(1).innerHTML = myLibrary[i].author;
             row.insertCell(2).innerHTML = "";
             row.insertCell(3).innerHTML = myLibrary[i].rating;
+            row.insertCell(4).innerHTML = "";
         }
         
         // add class to each new cell in table
@@ -65,6 +66,11 @@ document.getElementById("enter-info").addEventListener("click", function() {
         for(let i = 0 ; i < ratingCells.length ; i++) {
             ratingCells[i].classList.add("rating");
         }
+
+        let deleteCells = document.querySelectorAll("td:nth-child(5)");
+        for(let i = 0 ; i < deleteCells.length ; i++) {
+            deleteCells[i].classList.add("delete");
+        }
     }
 
     // clears the text from the form within click event
@@ -78,27 +84,45 @@ document.getElementById("enter-info").addEventListener("click", function() {
 
     // inserts delete button and adds id
     insertButton = () => {
-        let lastRow = document.getElementsByClassName("rating");
+        let lastRow = document.getElementsByClassName("delete");
         let lastRowArr = Array.from(lastRow);
         let newButton = document.createElement("button");
         newButton.textContent = "Delete";
         newButton.classList.add("delete-button");
 
         for (let i = 0; i < myLibrary.length; i++) {
-            newButton.setAttribute("id", i);
+            newButton.setAttribute("id", "delete-" + i);
         }
 
         lastRowArr.forEach((lastRow) => lastRow.appendChild(newButton))
         
         //adds delete button functionality
         newButton.addEventListener("click", event => {
+            let readButtons = document.querySelectorAll(".read-button");
+            let readButtonsArr = Array.from(readButtons);
+            readButtonsArr.splice(newButton.id, 1);
             let table = document.getElementById("table-data");
             table.deleteRow(newButton.id);
             myLibrary.splice(newButton.id, 1);
+            
             for (let i = 0; i < myLibrary.length; i++) {
-                document.getElementsByClassName("delete-button")[i].setAttribute("id", i);
-                document.getElementsByClassName("read-button")[i].setAttribute("id", "read-" + i);
+                document.getElementsByClassName("delete-button")[i].setAttribute("id", "delete-" + i);
+                document.getElementsByClassName("read-button")[i].setAttribute("id", i);
+                let button = readButtonsArr[i];
+                button.removeEventListener("click", function() {
+
+                    let textContent = button.textContent;
+                    if (textContent === "Read") {
+                        button.textContent = "Not Read";
+                        myLibrary[readButtons[i].id].changeStatus();
+                    } else {
+                        button.textContent = "Read";
+                        console.log(myLibrary);
+                        myLibrary[readButtons[i].id].changeStatus();
+                    }
+                });
             };
+        
             let tableRows = document.getElementById("table-data").children;
             for (let i = 0; i < tableRows.length; i++) {
                 let tableChild = tableRows[i];
@@ -129,22 +153,30 @@ document.getElementById("enter-info").addEventListener("click", function() {
         //         } else button.textContent = "Not Read", myLibrary[button.id].changeStatus();
         //     })});
         // };
-
         let readButtons = document.querySelectorAll(".read-button");
+        let readButtonsArr = Array.from(readButtons);
 
         for (let i = [readButtons.length -1]; i < readButtons.length; i++) {
-            let button = readButtons[i];
+            let button = readButtonsArr[i];
+            button.setAttribute("id", i);
             button.textContent = myLibrary[i].read;
-            button.setAttribute("id", "read-" + i);
+            
+
             button.addEventListener("click", function() {
 
                 let textContent = button.textContent;
                 if (textContent === "Read") {
                     button.textContent = "Not Read";
-                    myLibrary[i].changeStatus();
+                    let newRating = document.querySelectorAll(".rating");
+                    let newRatingArr = Array.from(newRating);
+                    newRatingArr[readButtons[i].id].textContent = "-";
+                    myLibrary[readButtons[i].id].changeStatus();
+                    myLibrary[readButtons[i].id].rating = "-";
+                    
                 } else {
                     button.textContent = "Read";
-                    myLibrary[i].changeStatus();
+                    console.log(myLibrary);
+                    myLibrary[readButtons[i].id].changeStatus();
                 }
             });
           }
