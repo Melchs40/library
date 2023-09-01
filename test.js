@@ -114,11 +114,42 @@ document.getElementById("enter-info").addEventListener("click", function() {
                     let textContent = button.textContent;
                     if (textContent === "Read") {
                         button.textContent = "Not Read";
+                        let newRating = document.querySelectorAll(".rating");
+                        let newRatingArr = Array.from(newRating);
+                        newRatingArr[readButtons[i].id].textContent = "-";
                         myLibrary[readButtons[i].id].changeStatus();
+                        myLibrary[readButtons[i].id].rating = "-";
+    
                     } else {
-                        button.textContent = "Read";
-                        console.log(myLibrary);
-                        myLibrary[readButtons[i].id].changeStatus();
+                        let newRating = document.querySelectorAll(".rating");
+                        let newRatingArr = Array.from(newRating);
+                        let readDialog = document.getElementById("readDialog");
+                        let selectEl = readDialog.querySelector("select");
+                        let confirmBtn = readDialog.querySelector("#confirmBtn");
+    
+                        readDialog.showModal();
+    
+                        selectEl.addEventListener("change", (e) => {
+                            confirmBtn.value = selectEl.value;
+                          });
+    
+                        readDialog.addEventListener("close", (e) => {
+                            newRatingArr[readButtons[i].id].textContent =
+                                readDialog.returnValue === "default"
+                                ? "-"
+                                : readDialog.returnValue;
+                        });
+    
+                        confirmBtn.addEventListener("click", (event) => {
+                            event.preventDefault();
+                            readDialog.close(selectEl.value);
+                            setTimeout(function() {
+                              myLibrary[readButtons[i].id].changeStatus();  
+                            }, 0);
+                            setTimeout(function() {
+                                button.textContent = "Read";
+                            }, 1);
+                        });
                     }
                 });
             };
@@ -161,7 +192,6 @@ document.getElementById("enter-info").addEventListener("click", function() {
             button.setAttribute("id", i);
             button.textContent = myLibrary[i].read;
             
-
             button.addEventListener("click", function() {
 
                 let textContent = button.textContent;
@@ -172,11 +202,38 @@ document.getElementById("enter-info").addEventListener("click", function() {
                     newRatingArr[readButtons[i].id].textContent = "-";
                     myLibrary[readButtons[i].id].changeStatus();
                     myLibrary[readButtons[i].id].rating = "-";
-                    
-                } else {
-                    button.textContent = "Read";
                     console.log(myLibrary);
-                    myLibrary[readButtons[i].id].changeStatus();
+
+                } else {
+                    let newRating = document.querySelectorAll(".rating");
+                    let newRatingArr = Array.from(newRating);
+                    let readDialog = document.getElementById("readDialog");
+                    let selectEl = readDialog.querySelector("select");
+                    let confirmBtn = readDialog.querySelector("#confirmBtn");
+
+                    readDialog.showModal();
+
+                    selectEl.addEventListener("change", (e) => {
+                        confirmBtn.value = selectEl.value;
+                      });
+
+                    readDialog.addEventListener("close", (e) => {
+                        newRatingArr[readButtons[i].id].textContent =
+                            readDialog.returnValue === "default"
+                            ? "-"
+                            : readDialog.returnValue;
+                    });
+
+                    confirmBtn.addEventListener("click", (event) => {
+                        event.preventDefault();
+                        readDialog.close(selectEl.value);
+                        setTimeout(function() {
+                          myLibrary[readButtons[i].id].changeStatus();  
+                        }, 0);
+                        setTimeout(function() {
+                            button.textContent = "Read";
+                        }, 1);
+                    });
                 }
             });
           }

@@ -50,6 +50,28 @@
         </tbody>
     </table>
 
+    <dialog id="readDialog">
+        <form>
+          <p>
+            <label>
+              Please rate this book:
+              <select>
+                <option value="default">Undecided</option>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+              </select>
+            </label>
+          </p>
+          <div>
+            <button value="-" formmethod="dialog">Cancel</button>
+            <button id="confirmBtn" value="default">Confirm</button>
+          </div>
+        </form>
+      </dialog>
+
     <div id="content-div">Test</div>
 
     <script src="test.js"></script>
