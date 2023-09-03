@@ -100,10 +100,11 @@ document.getElementById("enter-info").addEventListener("click", function() {
         newButton.addEventListener("click", event => {
             let readButtons = document.querySelectorAll(".read-button");
             let readButtonsArr = Array.from(readButtons);
-            readButtonsArr.splice(newButton.id, 1);
+            let index = 7;
+            readButtonsArr.splice(newButton.id.slice(index), 1);
             let table = document.getElementById("table-data");
-            table.deleteRow(newButton.id);
-            myLibrary.splice(newButton.id, 1);
+            table.deleteRow(newButton.id.slice(index));
+            myLibrary.splice(newButton.id.slice(index), 1);
             
             for (let i = 0; i < myLibrary.length; i++) {
                 document.getElementsByClassName("delete-button")[i].setAttribute("id", "delete-" + i);
@@ -119,6 +120,7 @@ document.getElementById("enter-info").addEventListener("click", function() {
                         newRatingArr[readButtons[i].id].textContent = "-";
                         myLibrary[readButtons[i].id].changeStatus();
                         myLibrary[readButtons[i].id].rating = "-";
+                        console.log(myLibrary);
     
                     } else {
                         let newRating = document.querySelectorAll(".rating");
