@@ -179,3 +179,262 @@ insertTable = () => {
         ratingCells[i].classList.add("rating");
     }
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+let newRating = document.querySelectorAll(".rating");
+            let newRatingArr = Array.from(newRating);
+            
+            button.addEventListener("click", function() {
+
+                let textContent = button.textContent;
+                if (textContent === "Read") {
+                    button.textContent = "Not Read";
+                    newRatingArr[readButtons[i].id].textContent = "-";
+                    myLibrary[readButtons[i].id].changeStatus();
+                    myLibrary[readButtons[i].id].rating = "-";
+                    console.log(myLibrary);
+
+                } else {
+                    let readDialog = document.getElementById("readDialog");
+                    let selectEl = readDialog.querySelector("select");
+                    let confirmBtn = readDialog.querySelector("#confirmBtn");
+
+                    readDialog.showModal();
+
+                    selectEl.addEventListener("change", (e) => {
+                        confirmBtn.value = selectEl.value;
+                      });
+
+                    readDialog.addEventListener("close", (e) => {
+                        newRatingArr[readButtons[i].id].textContent =
+                            readDialog.returnValue === "default"
+                            ? "-"
+                            : readDialog.returnValue;
+                        selectEl.value = "default";
+                    });
+
+                    confirmBtn.addEventListener("click", (event) => {
+                        event.preventDefault();
+                        myLibrary[readButtons[i].id].changeStatus();
+                        readDialog.close(selectEl.value);
+                        myLibrary[readButtons[i].id].rating = readDialog.returnValue;  
+                        button.textContent = "Read";
+                        selectEl.value = "default";
+                    });
+                }
+                button.removeEventListener("click", this);
+            });
+
+
+
+
+
+
+
+
+            createNewRating = () => {
+
+                let readButtons = document.querySelectorAll(".read-button");
+                let readButtonsArr = Array.from(readButtons);
+                let newRating = document.querySelectorAll(".rating");
+                let newRatingArr = Array.from(newRating);
+        
+                for (let i = 0; i < readButtonsArr.length; i++) {
+                    readButtonsArr[i].addEventListener("click", function() {
+                        let button = readButtonsArr[i];
+                        let textContent = button.textContent;
+                        if (textContent === "Read") {
+                            button.textContent = "Not Read";
+                            newRatingArr[i].textContent = "-";
+                            myLibrary[i].changeStatus();
+                            myLibrary[i].rating = "-";
+                            console.log(myLibrary);
+        
+                        } else {
+                            let readDialog = document.getElementById("readDialog");
+                            let selectEl = readDialog.querySelector("select");
+                            let confirmBtn = readDialog.querySelector("#confirmBtn");
+        
+                            readDialog.showModal();
+        
+                            selectEl.addEventListener("change", (e) => {
+                                confirmBtn.value = selectEl.value;
+                              });
+        
+                            readDialog.addEventListener("close", (e) => {
+                                newRatingArr[i].textContent =
+                                    readDialog.returnValue === "default"
+                                    ? "-"
+                                    : readDialog.returnValue;
+                                selectEl.value = "default";
+                            });
+        
+                            confirmBtn.addEventListener("click", (event) => {
+                                event.preventDefault();
+                                myLibrary[i].changeStatus();
+                                readDialog.close(selectEl.value);
+                                myLibrary[i].rating = readDialog.returnValue;  
+                                button.textContent = "Read";
+                                selectEl.value = "default";
+                            });
+                        }
+                    })
+                }
+            }
+
+
+
+
+
+
+
+            readButton.addEventListener("click", function(event) {
+                let button = event.target;
+                let newRating = document.querySelectorAll(".rating");
+                let newRatingArr = Array.from(newRating);
+                let id = button.getAttribute("id");
+                let textContent = button.textContent;
+                if (textContent === "Read") {
+                    button.textContent = "Not Read";
+                    newRatingArr[id].textContent = "-";
+                    myLibrary[id].changeStatus();
+                    myLibrary[id].rating = "-";
+                    console.log(myLibrary);
+
+                } else {
+                    let readDialog = document.getElementById("readDialog");
+                    let selectEl = readDialog.querySelector("select");
+                    let confirmBtn = readDialog.querySelector("#confirmBtn");
+
+                    readDialog.showModal();
+
+                    selectEl.addEventListener("change", (e) => {
+                        confirmBtn.value = selectEl.value;
+                      });
+
+                    readDialog.addEventListener("close", (e) => {
+                        myLibrary[id].read = "Read";
+                        button.textContent = "Read";
+                        selectEl.value = "default";
+                        myLibrary[id].rating =
+                            readDialog.returnValue === "default"
+                            ? "-"
+                            : readDialog.returnValue;
+                        document.querySelectorAll(".rating").item(readButton[i]).textContent = readDialog.returnValue;
+                        e.stopPropagation;
+                    });
+
+                    confirmBtn.addEventListener("click", (event) => {
+                        event.preventDefault();
+                        readDialog.close(selectEl.value);
+                        
+                        // myLibrary[id].changeStatus();
+                        // myLibrary[id].rating = readDialog.returnValue;  
+                        // button.textContent = "Read";
+                        // selectEl.value = "default";
+                        
+                    });
+                button.removeEventListener("click", this);
+                }
+                
+            });
+
+
+
+
+
+
+
+
+             // inserts read button and adds id
+    insertRead = () => {
+        let readRow = document.querySelectorAll(".read");
+        let readButton = document.createElement("button");
+        readButton.classList.add("read-button");
+       
+        readRow.forEach((readRow) => readRow.appendChild(readButton));
+
+        let readButtons = document.querySelectorAll(".read-button");
+        let readButtonsArr = Array.from(readButtons);
+
+        for (let i = [readButtons.length -1]; i < readButtons.length; i++) {
+            let button = readButtonsArr[i];
+            button.setAttribute("id", i);
+            button.textContent = myLibrary[i].read;
+        };
+    };
+
+    changeRead = () => { 
+
+        let readButtons = document.querySelectorAll(".read-button");
+        let readButtonsArr = Array.from(readButtons);
+
+        readButtons.forEach((readButton) => {
+            readButton.addEventListener("click", function(event) {
+                let thisThing = event.target
+                let newRating = document.querySelectorAll(".rating");
+                let newRatingArr = Array.from(newRating);
+              
+                if (readButton.textContent === "Read") {
+                    readButton.textContent = "Not Read";
+                    newRatingArr[readButton.id].textContent = "-";
+                    myLibrary[readButton.id].changeStatus();
+                    myLibrary[readButton.id].rating = "-";
+                    console.log(thisThing);
+
+                } else {
+                    let readDialog = document.getElementById("readDialog");
+                    let selectEl = readDialog.querySelector("select");
+                    let confirmBtn = readDialog.querySelector("#confirmBtn");
+
+                    readDialog.showModal();
+
+                    selectEl.addEventListener("change", (e) => {
+                        confirmBtn.value = selectEl.value;
+                      });
+
+                    readDialog.addEventListener("close", (e) => {
+                       
+                    });
+
+                    confirmBtn.addEventListener("click", (event) => {
+                        event.preventDefault();
+                        readDialog.close(selectEl.value);
+                        myLibrary[readButton.id].read = "Read";
+                        readButton.textContent = "Read";
+                        selectEl.value = "default";
+                        myLibrary[readButton.id].rating = readDialog.returnValue;
+                        newRatingArr[readButton.id].textContent =
+                            readDialog.returnValue === "default"
+                            ? "-"
+                            : readDialog.returnValue;
+                        if (myLibrary[readButton.id].rating === "default") {
+                            myLibrary[readButton.id].rating = "-";
+                        }
+                        console.log(thisThing);
+                        event.stopImmediatePropagation;
+                    });
+                
+                }
+            
+            });
+        });
+    }
