@@ -23,6 +23,12 @@ Book.prototype.info = function() {
     return this.title + " by " + this.author + ", I have " + this.read + " this, and rated it " + this.rating + " out of five.";
 };
 
+document.addEventListener("keyup", function(event) {
+    if (event.keyCode === 13) {
+        event.preventDefault();
+        document.getElementById("enter-info").click();
+    }
+});
 
 //  create object to be added to myLibrary with click event
 document.getElementById("enter-info").addEventListener("click", function() {
@@ -31,6 +37,7 @@ document.getElementById("enter-info").addEventListener("click", function() {
     let author = document.getElementById("author-name").value;
     let read = document.getElementById("read").value;
     let rating = document.getElementById("rating").value;
+
 
     // insert new table rows into table
     function insertTable () {

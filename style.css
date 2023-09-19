@@ -38,7 +38,18 @@ body {
 
 .form-text-div {
     width: 260px;
-    padding-right: 15px;
+    padding-bottom: 10px;
+}
+
+#title-div, #author-div, #read-div, #rating-div {
+    display: flex;
+    justify-content: space-between;
+}
+
+input[type=text], #read {
+    display: flex;
+    margin-left: 10px;
+    flex-grow: 1;
 }
 
 #page-text {
