@@ -10,29 +10,37 @@
 
     <div id="page-title">My Book Library</div>
 
-    <div id="page-text">This page allows you to keep track of all of your books. You can add a title, the author, whether you've read it or not, and a rating (1-5). A title is required, but all other information is optional.</div>
+    <div id="page-text">This page allows for you to keep track of all of your books. You can add a title, the author, whether you've read the book or not, and a rating, between one and five. A title is required for every book, but all other information is optional.</div>
     
     <div class="form-content" id="book-form">
         <form action="#" id="my-form" action="get">
-            <label for="book-title">Book Title:</label>
-            <input type="text" id="book-title" name="book-title" required placeholder="Enter book title">
-            <label for="author-name">Author:</label>
-            <input type="text" id="author-name" name="author-name" required placeholder="Enter author name">
-            <label for="read">Read/Not Read:</label>
-            <select id="read" name="read">
-                <option selected>Read</option>
-                <option>Not Read</option>
-              </select>
-            <label for="rating">Rating:</label>
-            <input type="range"
-                name="rating"
-                id="rating"
-                min="1"
-                max="5"
-                step="1"
-                value="3" />
-            <output class="rating-output" for="rating"></output>
-            <button type="button" id="enter-info">Submit</button>
+            <div id="title-div" class="form-text-div">
+                <label for="book-title">Book Title:</label>
+                <input type="text" id="book-title" name="book-title" required placeholder="Enter book title">
+            </div>
+            <div id="author-div" class="form-text-div">
+                <label for="author-name">Author:</label>
+                <input type="text" id="author-name" name="author-name" required placeholder="Enter author name">
+            </div>
+            <div id="read-div" class="form-text-div">
+                <label for="read">Read/Not Read:</label>
+                <select id="read" name="read">
+                    <option selected>Read</option>
+                    <option>Not Read</option>
+                </select>
+            </div>
+            <div id="rating-div" class="form-text-div">
+                <label for="rating">Rating:</label>
+                <input type="range"
+                    name="rating"
+                    id="rating"
+                    min="1"
+                    max="5"
+                    step="1"
+                    value="3" />
+                <output class="rating-output" for="rating"></output>
+                <button type="button" id="enter-info">Submit</button>
+            </div>
         </form>
     </div>
     
@@ -71,9 +79,10 @@
           </div>
         </form>
       </dialog>
-
-    <div id="content-div">Test</div>
+    <div id="spacing-div"></div>
+<footer id="footer">Copyright © Melchs40's Computer Whiz Coding 2023</footer>
 
     <script src="test.js"></script>
 </body>
+
 </html>

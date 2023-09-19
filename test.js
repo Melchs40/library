@@ -44,6 +44,7 @@ document.getElementById("enter-info").addEventListener("click", function() {
             row.insertCell(2).innerHTML = "";
             row.insertCell(3).innerHTML = myLibrary[i].rating;
             row.insertCell(4).innerHTML = "";
+            console.log(myLibrary[i]);
         }
         
         // add class to each new cell in table
@@ -150,7 +151,7 @@ document.getElementById("enter-info").addEventListener("click", function() {
                     newRatingArr[id].textContent = "-";
                     myLibrary[id].changeStatus();
                     myLibrary[id].rating = "-";
-                    console.log(clickedButton.id);
+                    console.log(myLibrary[id]);
 
                 } else {
                     let readDialog = document.getElementById("readDialog");
@@ -162,12 +163,12 @@ document.getElementById("enter-info").addEventListener("click", function() {
                     confirmBtn.addEventListener("click", (event) => {
                         event.preventDefault();
                         readDialog.close(selectEl.value);
-                        myLibrary[id].read = "Read";
+                        myLibrary[id].changeStatus();
                         clickedButton.textContent = "Read";
                         selectEl.value = "default";
                         myLibrary[id].rating = readDialog.returnValue;
                         document.querySelectorAll(".rating").item(id).textContent = myLibrary[id].rating;
-                        console.log(clickedButton.id);
+                        console.log(myLibrary[id]);
                     }, {once: true});
                 
                 }
@@ -176,7 +177,6 @@ document.getElementById("enter-info").addEventListener("click", function() {
 
         }; 
     }
-
 
     // creates alert on no title, adds unknown to author when missing, blank rating when not read
     if (title == "") {
@@ -192,6 +192,7 @@ document.getElementById("enter-info").addEventListener("click", function() {
         insertTable(), insertButton(), clearText(), insertRead();
     } else myLibrary.push(new Book(title, author, read, rating)), insertTable(), insertButton(), clearText(), insertRead();
 });
+
 
 // create visual output for rating system in form
 const rating = document.querySelector("#rating");
