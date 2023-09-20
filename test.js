@@ -172,7 +172,7 @@ document.getElementById("enter-info").addEventListener("click", function() {
                         readDialog.close(selectEl.value);
                         myLibrary[id].changeStatus();
                         clickedButton.textContent = "Read";
-                        selectEl.reset = "default";
+                        selectEl.value = "-";
                         myLibrary[id].rating = readDialog.returnValue;
                         document.querySelectorAll(".rating").item(id).textContent = myLibrary[id].rating;
                         console.log(myLibrary[id]);
