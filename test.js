@@ -225,3 +225,4 @@ output.textContent = rating.value;
 rating.addEventListener("input", () => {
   output.textContent = rating.value;
 });
+
