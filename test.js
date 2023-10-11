@@ -3,14 +3,28 @@ let myLibrary = [];
 
 
 // create object constructor to be placed into myLibrary array
-function Book(title, author, read, rating) {
-    this.title = title
-    this.author = author
-    this.read = read
-    this.rating = rating
+// function Book(title, author, read, rating) {
+//     this.title = title
+//     this.author = author
+//     this.read = read
+//     this.rating = rating
 
-    Object.prototype.changeStatus = function() {
+//     Object.prototype.changeStatus = function() {
 
+//         if (this.read == "Read") {
+//             this.read = "Not Read";
+//         } else this.read = "Read"
+//     }
+// }
+
+class Book {
+    constructor(title, author, read, rating) {
+        this.title = title
+        this.author = author
+        this.read = read
+        this.rating = rating
+    }
+    get changeStatus () {
         if (this.read == "Read") {
             this.read = "Not Read";
         } else this.read = "Read"
@@ -19,9 +33,10 @@ function Book(title, author, read, rating) {
 
 
 // create function on Book prototype
-Book.prototype.info = function() {
-    return this.title + " by " + this.author + ", I have " + this.read + " this, and rated it " + this.rating + " out of five.";
-};
+// Book.prototype.info = function() {
+//     return this.title + " by " + this.author + ", I have " + this.read + " this, and rated it " + this.rating + " out of five.";
+// };
+
 
 document.addEventListener("keyup", function(event) {
     if (event.keyCode === 13) {
@@ -156,7 +171,7 @@ document.getElementById("enter-info").addEventListener("click", function() {
                 if (textContent === "Read") {
                     clickedButton.textContent = "Not Read";
                     newRatingArr[id].textContent = "-";
-                    myLibrary[id].changeStatus();
+                    myLibrary[id].changeStatus;
                     myLibrary[id].rating = "-";
                     console.log(myLibrary[id]);
 
@@ -170,7 +185,7 @@ document.getElementById("enter-info").addEventListener("click", function() {
                     confirmBtn.addEventListener("click", (event) => {
                         event.preventDefault();
                         readDialog.close(selectEl.value);
-                        myLibrary[id].changeStatus();
+                        myLibrary[id].changeStatus;
                         clickedButton.textContent = "Read";
                         selectEl.value = "-";
                         myLibrary[id].rating = readDialog.returnValue;
